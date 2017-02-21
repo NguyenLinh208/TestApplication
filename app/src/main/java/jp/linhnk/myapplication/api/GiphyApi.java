@@ -55,6 +55,8 @@ public class GiphyApi extends BaseApiController<GiphyDataListResponse> {
         HashMap<String, String> params = new HashMap<>();
         params.put("q", "cat");
         params.put("api_key", AppConstant.GiphyApiKey);
+        params.put("limit", "27");
+        params.putAll(getAddParams());
         return params;
     }
 

@@ -9,6 +9,7 @@ public abstract class RecyclerModel {
 
     public enum ItemViewType {
         Giphy(false),
+        LoadMore(true),
         Unknow(false);
 
         //Layout manager用
