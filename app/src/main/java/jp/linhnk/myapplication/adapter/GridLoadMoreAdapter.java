@@ -1,6 +1,5 @@
 package jp.linhnk.myapplication.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,7 @@ import java.util.List;
 import jp.linhnk.myapplication.R;
 import jp.linhnk.myapplication.model.datamodel.RecyclerModel;
 import jp.linhnk.myapplication.model.recyclermodel.GiphyViewHolder;
-import jp.linhnk.myapplication.model.recyclermodel.LoadMoreModel;
+import jp.linhnk.myapplication.model.datamodel.LoadMoreModel;
 import jp.linhnk.myapplication.model.recyclermodel.LoadMoreViewHolder;
 import jp.linhnk.myapplication.model.recyclermodel.RecyclerGridViewHolder;
 
@@ -74,9 +73,9 @@ public class GridLoadMoreAdapter extends HeaderFooterAdapter<RecyclerGridViewHol
     public int getSpanSize(int position) {
         int viewType = this.getItemViewType(position);
         if (viewType == ITEM_VIEW_TYPE_HEADER || viewType == ITEM_VIEW_TYPE_FOOTER) {
-            return 3;
+            return 2;
         }
         RecyclerModel.ItemViewType type = RecyclerModel.ItemViewType.values()[viewType];
-        return type.isFullSpan ? 3 : 1;
+        return type.isFullSpan ? 2 : 1;
     }
 }

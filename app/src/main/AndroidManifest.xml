@@ -21,7 +21,10 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".SampleListActivity"
+		<activity android:name=".GiphyListActivity"
+		          android:theme="@style/AppTheme"/>
+
+		<activity android:name=".UzabaseFeedListActivity"
 		          android:theme="@style/AppTheme"/>
 	</application>
 

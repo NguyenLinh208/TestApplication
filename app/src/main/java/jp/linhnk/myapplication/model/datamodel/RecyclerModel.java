@@ -9,6 +9,7 @@ public abstract class RecyclerModel {
 
     public enum ItemViewType {
         Giphy(false),
+        Uzabase(true),
         LoadMore(true),
         Unknow(false);
 

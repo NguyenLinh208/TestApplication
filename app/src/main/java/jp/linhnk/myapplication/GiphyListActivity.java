@@ -14,22 +14,22 @@ import jp.linhnk.myapplication.adapter.GridLoadMoreAdapter;
 import jp.linhnk.myapplication.api.ApiObjectCallback;
 import jp.linhnk.myapplication.api.GiphyApi;
 import jp.linhnk.myapplication.base.BaseActivity;
-import jp.linhnk.myapplication.databinding.ActivitySampleListBinding;
+import jp.linhnk.myapplication.databinding.ActivityRecyclerListBinding;
 import jp.linhnk.myapplication.model.GiphyDataListResponse;
 import jp.linhnk.myapplication.model.datamodel.GiphyRecyclerModel;
 import jp.linhnk.myapplication.model.datamodel.RecyclerModel;
 import jp.linhnk.myapplication.model.giphy.GiphyImage;
-import jp.linhnk.myapplication.model.recyclermodel.LoadMoreModel;
+import jp.linhnk.myapplication.model.datamodel.LoadMoreModel;
 
 /**
  * Created by usr0200475 on 2017/02/16
  * Copyright © 2017 GMO Media Inc. All rights reserved.
  */
 
-public class SampleListActivity extends BaseActivity {
+public class GiphyListActivity extends BaseActivity {
 
     GridLoadMoreAdapter imageListAdapter;
-    ActivitySampleListBinding binding;
+    ActivityRecyclerListBinding binding;
     protected List<RecyclerModel> dataSet = new ArrayList<>();
     protected LoadMoreModel loadMoreModel = new LoadMoreModel();
     private int offset;
@@ -43,20 +43,14 @@ public class SampleListActivity extends BaseActivity {
     }
 
     private void configureLayout() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_sample_list);
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_recycler_list);
         binding.recyclerView.setHasFixedSize(true);
         setupRecyclerView();
-        imageListAdapter.setOnLoadMore(new GridLoadMoreAdapter.OnLoadMore() {
-            @Override
-            public void onLoadMore() {
-                requestData();
-            }
-        });
+        imageListAdapter.setOnLoadMore(() -> requestData());
     }
 
     private void setupRecyclerView() {
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -74,7 +68,7 @@ public class SampleListActivity extends BaseActivity {
         api.start(new ApiObjectCallback<GiphyDataListResponse>() {
             @Override
             public void onSuccess(GiphyDataListResponse response) {
-                handlRequestSuccess(response);
+                handleRequestSuccess(response);
             }
 
             @Override
@@ -84,17 +78,15 @@ public class SampleListActivity extends BaseActivity {
         });
     }
 
-    private void handlRequestSuccess(GiphyDataListResponse response) {
+    private void handleRequestSuccess(GiphyDataListResponse response) {
         int currentCount = dataSet.size();
         offset++ ;
         binding.progress.setVisibility(View.GONE);
         loadMoreModel.removeFromDataSet(dataSet, imageListAdapter);
         convertDataToRecyclerModel(response.data);
 
-
         imageListAdapter.setDataSet(dataSet);
         loadMoreModel.addToDataSetIfNecessary(dataSet, offset > 0);
-
 
         if (currentCount == 0) {
             imageListAdapter.notifyDataSetChanged();

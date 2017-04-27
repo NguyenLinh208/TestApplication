@@ -10,28 +10,27 @@ import com.bumptech.glide.Glide;
 
 import jp.linhnk.myapplication.BR;
 import jp.linhnk.myapplication.customview.ImageAutoScale;
-import jp.linhnk.myapplication.model.datamodel.GiphyRecyclerModel;
 import jp.linhnk.myapplication.model.datamodel.RecyclerModel;
-import jp.linhnk.myapplication.model.giphy.GiphyImage;
+import jp.linhnk.myapplication.model.datamodel.UzabaseRecyclerModel;
+import jp.linhnk.myapplication.model.uzabase.FeedItem;
 
 /**
- * Created by usr0200475 on 2017/02/19.
+ * Created by usr0200475 on 2017/03/08.
  * Copyright © 2017 GMO Media Inc. All rights reserved.
  */
 
-
-public class GiphyViewHolder extends RecyclerGridViewHolder {
+public class UzabaseViewHolder extends RecyclerGridViewHolder {
     private ViewDataBinding viewDataBinding;
 
-    public GiphyViewHolder(View itemView) {
+    public UzabaseViewHolder(View itemView) {
         super(itemView);
         viewDataBinding = DataBindingUtil.bind(itemView);
     }
 
     @Override
     public void bindData(RecyclerModel recyclerModel) {
-        GiphyImage giphyImage = ((GiphyRecyclerModel) recyclerModel).giphyImage;
-        viewDataBinding.setVariable(BR.original, giphyImage.images.original);
+        FeedItem feedItem = ((UzabaseRecyclerModel) recyclerModel).feedItem;
+        viewDataBinding.setVariable(BR.feed, feedItem);
     }
 
     @BindingAdapter({"bind:imageUrl"})

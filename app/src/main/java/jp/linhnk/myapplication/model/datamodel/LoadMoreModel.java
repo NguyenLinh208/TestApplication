@@ -1,4 +1,4 @@
-package jp.linhnk.myapplication.model.recyclermodel;
+package jp.linhnk.myapplication.model.datamodel;
 
 import android.support.v7.widget.RecyclerView;
 

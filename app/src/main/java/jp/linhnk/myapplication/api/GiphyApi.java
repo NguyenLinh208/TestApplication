@@ -70,5 +70,6 @@ public class GiphyApi extends BaseApiController<GiphyDataListResponse> {
 
     @Override
     public void onFailure(Call<GiphyDataListResponse> call, Throwable t) {
+
     }
 }
